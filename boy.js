@@ -4,14 +4,14 @@ class Boy{
 
         this.width=width;
         this.height=height;
-        this.image = loadImage("images/ykYbpg.jpg");
+        
         World.add(world,this.body);
     }
     display(){
         var pos = this.body.position;
         push();
-        imageMode(CENTER);
-        image(this.image,pos.x,pos.y,this.width,this.height);
+        //imageMode(CENTER);
+        //image(this.image,pos.x,pos.y,this.width,this.height);
         pop();
     }
 }

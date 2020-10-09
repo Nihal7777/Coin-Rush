@@ -4,13 +4,12 @@ const Bodies=Matter.Bodies;
 var engine,world;
 var bg,boy,boyRun,bomb,bombImg,trunk,trunkImg,branch1Img,branch2Img,gameState;
 var form,ground,branch1,branch2;
-
+var boySprite,boyStand;
 function preload(){
-  //bg = loadImage("images/day-background.jpg");
-  trunkImg = loadImage("images/trunk.png");
-  branch1Img = loadImage("images/branch.png");
-  branch2Img = loadImage("images/branch 2.png");
-  bombImg = loadImage("images/bomb.png");
+  bg = loadImage("images/day_image.jpg");
+ 
+  
+  boyStand = loadImage("images/1.png");
   boyRun = loadAnimation("images/1.png","images/2.png","images/3.png","images/4.png");
 }
 function setup() {
@@ -20,19 +19,36 @@ function setup() {
   world = engine.world;
  gameState="start";
  form=new Form();
+ boySprite = createSprite(80,430);
+ boySprite.addAnimation("run",boyRun);
+ boySprite.addAnimation("stand",boyStand);
+ 
+ boySprite.scale = 0.6;
  game = new Game();
  game.start();
 
 }
 
 function draw() {
-  background(255); 
+  background(bg); 
   Engine.update(engine); 
+  fill(255); 
+  text(mouseX+","+mouseY,mouseX,mouseY);
+  
    if(gameState==="start"){
      form.display();
      
    }
    if(gameState === "play"){
      game.play();
+     if(keyDown("space") && boy.body.position.y>400){
+      
+      Matter.Body.setVelocity(boy.body,{x:0,y:-10});
+      boySprite.changeAnimation("stand");
+     }
+     
+     boySprite.x = boy.body.position.x;
+     boySprite.y = boy.body.position.y;
+     drawSprites();
    }
 }
