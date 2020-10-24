@@ -52,6 +52,7 @@ display(){
         this.button2.position(480,330);
         this.button2.mousePressed(()=>{
             gameState="play";
+            //bgSound.loop();
         });
     });
 }
